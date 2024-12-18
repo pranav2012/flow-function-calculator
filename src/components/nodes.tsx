@@ -96,8 +96,8 @@ const InputNode = ({ node }: { node: WorkflowNode }) => {
 				<input
 					id={`initial-value-${node.nodeId}`}
 					type="number"
-					className="w-full p-2 mr-2 border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-					defaultValue="2"
+					className="w-full focus:outline-none text-center text-lg font-bold p-2 mr-2 border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+					defaultValue="0"
 					min="0"
 				/>
 				<div className="flex items-center gap-2 pr-2">
@@ -121,8 +121,8 @@ const OutputNode = ({ node }: { node: WorkflowNode }) => {
 				<input
 					id={`output-value-${node.nodeId}`}
 					type="text"
-					className="w-full p-2 ml-2 border "
-					defaultValue="120"
+					className="w-full focus:outline-none text-lg font-bold p-2 ml-2 border text-center"
+					defaultValue="0"
 					readOnly
 				/>
 			</div>

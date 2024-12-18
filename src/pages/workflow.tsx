@@ -13,7 +13,7 @@ const workflowNodes = [
 		type: NodeType.INPUT,
 		position: {
 			x: 120,
-			y: 259,
+			y: 257,
 		},
 		connectedTo: [2],
 		connectedFrom: [],
@@ -79,7 +79,7 @@ const workflowNodes = [
 		type: NodeType.OUTPUT,
 		position: {
 			x: 1300,
-			y: 259,
+			y: 257,
 		},
 		connectedTo: [],
 		connectedFrom: [4],
@@ -104,12 +104,12 @@ export const Workflow = () => {
 
 				if (node.type === NodeType.INPUT) {
 					sourceX = node.position.x + 98;
-					sourceY = node.position.y + 51;
+					sourceY = node.position.y + 53;
 				}
 
 				if (targetNode.type === NodeType.OUTPUT) {
 					targetX = targetNode.position.x + 18;
-					targetY = targetNode.position.y + 51;
+					targetY = targetNode.position.y + 53;
 				}
 
 				return (
