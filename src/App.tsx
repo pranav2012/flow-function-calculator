@@ -1,7 +1,12 @@
+import { DotGridBackground } from "@HOC/dotGridBackground";
+import { Workflow } from "@pages/workflow";
+
 const App = () => {
-  return <div className="">
-    fsf
-  </div>;
+	return (
+		<DotGridBackground>
+			<Workflow />
+		</DotGridBackground>
+	);
 };
 
 export default App;
