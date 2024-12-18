@@ -1,23 +1,9 @@
-export enum NodeType {
-	INPUT = "input",
-	FUNCTION = "function",
-	OUTPUT = "output",
-}
+import { useNodeValues } from "@HOC/nodeContext";
+import { NodeType, type WorkflowNode } from "../types/node";
 
-interface Position {
-	x: number;
-	y: number;
-}
-
-export interface WorkflowNode {
-	nodeId: number;
-	displayName: string;
-	type: NodeType;
-	position: Position;
-	connectedTo: number[];
-	connectedFrom: number[];
-}
 const FunctionNode = ({ node }: { node: WorkflowNode }) => {
+	const { equations, updateEquation } = useNodeValues();
+
 	return (
 		<div className="bg-white rounded-[15px] border border-[#DFDFDF] p-4 shadow-md w-[235px]">
 			<div className="flex items-center gap-2 mb-4">
@@ -48,6 +34,13 @@ const FunctionNode = ({ node }: { node: WorkflowNode }) => {
 					<input
 						id={`equation-${node.nodeId}`}
 						type="text"
+						value={equations[node.nodeId] ?? node.defaultEquation}
+						onChange={(e) =>
+							updateEquation(
+								node.nodeId.toString(),
+								e.target.value
+							)
+						}
 						className="w-full p-2 border text-xs border-[#D3D3D3] rounded-lg bg-white"
 						placeholder="Enter equation (use 'x' for value)"
 					/>
@@ -87,6 +80,8 @@ const FunctionNode = ({ node }: { node: WorkflowNode }) => {
 };
 
 const InputNode = ({ node }: { node: WorkflowNode }) => {
+	const { nodeValues, updateNodeValue } = useNodeValues();
+
 	return (
 		<div className="flex flex-col items-center">
 			<div className="bg-[#E29A2D] text-white px-2 py-1 rounded-full mb-1 text-xs">
@@ -97,7 +92,13 @@ const InputNode = ({ node }: { node: WorkflowNode }) => {
 					id={`initial-value-${node.nodeId}`}
 					type="number"
 					className="w-full focus:outline-none text-center text-lg font-bold p-2 mr-2 border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-					defaultValue="0"
+					value={nodeValues[node.nodeId] ?? 2}
+					onChange={(e) =>
+						updateNodeValue(
+							node.nodeId.toString(),
+							Number(e.target.value)
+						)
+					}
 					min="0"
 				/>
 				<div className="flex items-center gap-2 pr-2">
@@ -109,6 +110,8 @@ const InputNode = ({ node }: { node: WorkflowNode }) => {
 };
 
 const OutputNode = ({ node }: { node: WorkflowNode }) => {
+	const { nodeValues } = useNodeValues();
+
 	return (
 		<div className="flex flex-col items-center">
 			<div className="bg-[#4CAF79] text-white px-2 py-1 rounded-full mb-1 text-xs">
@@ -122,7 +125,7 @@ const OutputNode = ({ node }: { node: WorkflowNode }) => {
 					id={`output-value-${node.nodeId}`}
 					type="text"
 					className="w-full pointer-events-none focus:outline-none text-lg font-bold p-2 ml-2 border text-center"
-					defaultValue="0"
+					value={nodeValues[4] ?? ""}
 					readOnly
 				/>
 			</div>

@@ -1,92 +1,8 @@
 import { Node } from "@components/nodes";
+import { workflowNodes } from "@constants/node";
+import { NodeProvider } from "@HOC/nodeContext";
+import { NodeType } from "../types/node";
 
-enum NodeType {
-	INPUT = "input",
-	FUNCTION = "function",
-	OUTPUT = "output",
-}
-
-const workflowNodes = [
-	{
-		nodeId: 1,
-		displayName: "Initial Value of x",
-		type: NodeType.INPUT,
-		position: {
-			x: 120,
-			y: 257,
-		},
-		connectedTo: [2],
-		connectedFrom: [],
-	},
-	{
-		nodeId: 2,
-		displayName: "Function: 1",
-		type: NodeType.FUNCTION,
-		position: {
-			x: 250,
-			y: 100,
-		},
-		connectedTo: [3],
-		connectedFrom: [1],
-	},
-	{
-		nodeId: 3,
-		displayName: "Function: 2",
-		type: NodeType.FUNCTION,
-		position: {
-			x: 650,
-			y: 100,
-		},
-		connectedTo: [5],
-		connectedFrom: [2],
-	},
-	{
-		nodeId: 4,
-		displayName: "Function: 3",
-		type: NodeType.FUNCTION,
-		position: {
-			x: 1050,
-			y: 100,
-		},
-		connectedTo: [7],
-		connectedFrom: [6],
-	},
-	{
-		nodeId: 5,
-		displayName: "Function: 4",
-		type: NodeType.FUNCTION,
-		position: {
-			x: 450,
-			y: 400,
-		},
-		connectedTo: [6],
-		connectedFrom: [2],
-	},
-	{
-		nodeId: 6,
-		displayName: "Function: 5",
-		type: NodeType.FUNCTION,
-		position: {
-			x: 850,
-			y: 400,
-		},
-		connectedTo: [4],
-		connectedFrom: [5],
-	},
-	{
-		nodeId: 7,
-		displayName: "Final Output y",
-		type: NodeType.OUTPUT,
-		position: {
-			x: 1300,
-			y: 257,
-		},
-		connectedTo: [],
-		connectedFrom: [4],
-	},
-];
-
-// In workflow.tsx
 export const Workflow = () => {
 	const renderConnections = () => {
 		return workflowNodes.flatMap((node) =>
@@ -153,16 +69,18 @@ export const Workflow = () => {
 	};
 
 	return (
-		<div className="relative w-full min-h-screen">
-			{renderConnections()}
-			{workflowNodes.map((node) => (
-				<div
-					key={node.nodeId}
-					className="absolute"
-					style={{ top: node.position.y, left: node.position.x }}>
-					<Node node={node} />
-				</div>
-			))}
-		</div>
+		<NodeProvider>
+			<div className="relative w-full min-h-screen">
+				{renderConnections()}
+				{workflowNodes.map((node) => (
+					<div
+						key={node.nodeId}
+						className="absolute"
+						style={{ top: node.position.y, left: node.position.x }}>
+						<Node node={node} />
+					</div>
+				))}
+			</div>
+		</NodeProvider>
 	);
 };

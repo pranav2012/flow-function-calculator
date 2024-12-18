@@ -31,7 +31,7 @@ export const DotGridBackground = ({ children }: DotGridBackgroundProps) => {
                 dots.push(
                     <div
                         key={`${row}-${col}`}
-                        className="absolute rounded-full bg-slate-300"
+                        className="absolute rounded-full bg-[#d8d7d78b]"
                         style={{
                             top: `${row * spacing}px`,
                             left: `${col * spacing}px`,
@@ -46,7 +46,7 @@ export const DotGridBackground = ({ children }: DotGridBackgroundProps) => {
     }, [dimensions]);
 
     return (
-        <div className="relative w-full bg-slate-50 overflow-hidden">
+        <div className="relative w-full bg-[#F8F8F8] overflow-hidden">
             <div className="absolute inset-0">
                 {dotGrid}
             </div>
