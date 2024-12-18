@@ -121,7 +121,7 @@ const OutputNode = ({ node }: { node: WorkflowNode }) => {
 				<input
 					id={`output-value-${node.nodeId}`}
 					type="text"
-					className="w-full focus:outline-none text-lg font-bold p-2 ml-2 border text-center"
+					className="w-full pointer-events-none focus:outline-none text-lg font-bold p-2 ml-2 border text-center"
 					defaultValue="0"
 					readOnly
 				/>
