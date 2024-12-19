@@ -4,7 +4,11 @@ export enum NodeType {
 	OUTPUT = "output",
 }
 
-interface Position {
+export interface Position {
+	x: number;
+	y: number;
+}
+export interface ConnectionPoint {
 	x: number;
 	y: number;
 }

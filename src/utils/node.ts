@@ -1,3 +1,6 @@
+import { workflowNodes } from "@constants/node";
+import { ConnectionPoint, NodeType } from "../types/node";
+
 export const evaluateEquation = (equation: string, xValue: number) => {
 	// Remove all spaces from equation
 	equation = equation.replace(/\s+/g, "");
@@ -55,4 +58,33 @@ export const evaluateEquation = (equation: string, xValue: number) => {
 	} catch {
 		return null;
 	}
+};
+
+export const getConnectionPoints = (
+	node: (typeof workflowNodes)[0],
+	targetNode: (typeof workflowNodes)[0]
+): { source: ConnectionPoint; target: ConnectionPoint } => {
+	const source: ConnectionPoint = {
+		x:
+			node.type === NodeType.INPUT
+				? node.position.x + 98
+				: node.position.x + 210,
+		y:
+			node.type === NodeType.INPUT
+				? node.position.y + 53
+				: node.position.y + 210,
+	};
+
+	const target: ConnectionPoint = {
+		x:
+			targetNode.type === NodeType.OUTPUT
+				? targetNode.position.x + 18
+				: targetNode.position.x + 24,
+		y:
+			targetNode.type === NodeType.OUTPUT
+				? targetNode.position.y + 53
+				: targetNode.position.y + 210,
+	};
+
+	return { source, target };
 };
